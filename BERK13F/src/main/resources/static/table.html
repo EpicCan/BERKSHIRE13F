@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .my-table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .my-table th,
+        .my-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .my-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .my-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .my-table tbody tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<table class="my-table">
+    <thead>
+
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '/api/data',
+            method: 'GET',
+            success: function(response) {
+                var data = JSON.parse(response);
+                // 处理数据
+                // 遍历数据，创建表格行并插入数据
+                // 获取表格元素和表体元素
+                const table = document.querySelector('.my-table');
+                const tbody = table.querySelector('tbody');
+
+                // 定义要插入表格的数据
+                for (let i = 0; i < data.length; i++) {
+                    const row = tbody.insertRow(i);
+
+                    for (let j = 0; j < data[i].length; j++) {
+                        const cell = row.insertCell(j);
+                        cell.innerHTML = data[i][j];
+                    }
+                }
+
+            }
+        });
+    });
+
+    // const data = [
+    //     ['title1', 'title2', '行1列3', '行1列4', '行1列5', '行1列6', '行1列7', '行1列8', '行1列9', '行1列10'],
+    //     ['11', '12', '行1列3', '行1列4', '行1列5', '行1列6', '行1列7', '行1列8', '行1列9', '行1列10'],
+    //     ['行2列1', '行2列2', '行2列3', '行2列4', '行2列5', '行2列6', '行2列7', '行2列8', '行2列9', '行2列10'],
+    //     ['行3列1', '行3列2', '行3列3', '行3列4', '行3列5', '行3列6', '行3列7', '行3列8', '行3列9', '行3列10'],
+    // ];
+
+
+</script>
+
+</body>
+</html>
